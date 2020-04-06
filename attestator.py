@@ -9,7 +9,6 @@
 import base64
 from io import BytesIO
 from PIL import Image
-from pprint import pprint
 from datetime import datetime, timedelta
 
 from reportlab.pdfgen import canvas
@@ -121,6 +120,8 @@ def generate_pdf(user_data):
     renderPDF.draw(big_qr, c, 1.3 * cm, 16.8 * cm)
 
     c.save()
+
+    print("'attestation.pdf' a été généré.")
 
 
 def generate_qrcode(user_data):
