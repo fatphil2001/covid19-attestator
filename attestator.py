@@ -27,7 +27,7 @@ user_data = {
     "birth_day": 1,
     "birth_place": "Lyon",
     "address": "999 avenue de france",
-    "zip_code": "71000",
+    "zip_code": "75001",
     "city": "Paris",
     "reasons": [],
     "trip_datetime": datetime.now() + timedelta(minutes=10),
