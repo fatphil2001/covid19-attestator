@@ -21,6 +21,10 @@ from reportlab.graphics import renderPDF
 now = datetime.now()
 
 def generate_pdf(user_data):
+
+    for key in user_data:
+        assert (user_data[key] != ''), 'Erreur: le champs '+ key + ' est vide.'
+
     c = canvas.Canvas("attestation.pdf")
 
     im = ImageReader(background_image)
@@ -75,8 +79,8 @@ def generate_pdf(user_data):
     )
 
     c.setFont("Helvetica", 14)
-    for reason in user_data["reasons"]:
-        c.drawString(2.7 * cm, reasons[reason] * cm, "X")
+    #for reason in user_data["reasons"]:
+    c.drawString(2.7 * cm, user_data["reasons"] * cm, "X")
 
     qrcode = generate_qrcode(user_data)
 
@@ -96,7 +100,7 @@ def generate_pdf(user_data):
 
     c.save()
 
-    print("'attestation.pdf' a été généré.")
+    # print("'attestation.pdf' a été généré.")
 
 
 def generate_qrcode(user_data):
@@ -123,7 +127,7 @@ def generate_qrcode(user_data):
                 user_data["trip_datetime"].hour,
                 user_data["trip_datetime"].minute,
             ),
-            "Motifs: %s" % "-".join(user_data["reasons"]),
+            "Motifs: %s" % user_data["reasons"],
         ]
     )
     return QrCodeWidget(code)
