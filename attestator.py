@@ -18,32 +18,7 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.barcode.qr import QrCodeWidget
 from reportlab.graphics import renderPDF
 
-user_data = {
-    "first_name": "Jean",
-    "last_name": "Dupont",
-    "birth_year": 1970,
-    "birth_month": 1,
-    "birth_day": 1,
-    "birth_place": "Lyon",
-    "address": "999 avenue de france",
-    "zip_code": "75001",
-    "city": "Paris",
-    "reasons": [],
-    "trip_datetime": datetime.now() + timedelta(minutes=10),
-}
-
-reasons = {
-    "travail": 18.6,
-    "courses": 16.85,
-    "sante": 15.4,
-    "famille": 14.1,
-    "sport": 12.15,
-    "judiciaire": 10.5,
-    "missions": 9.2,
-}
-
 now = datetime.now()
-
 
 def generate_pdf(user_data):
     c = canvas.Canvas("attestation.pdf")
@@ -5009,4 +4984,3 @@ background_image = Image.open(background_string)
 
 if __name__ == "__main__":
     main()
-
