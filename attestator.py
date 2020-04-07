@@ -99,7 +99,6 @@ def generate_pdf(user_data):
     renderPDF.draw(big_qr, c, 1.3 * cm, 16.8 * cm)
 
     c.save()
-
     # print("'attestation.pdf' a été généré.")
 
 
@@ -131,20 +130,6 @@ def generate_qrcode(user_data):
         ]
     )
     return QrCodeWidget(code)
-
-
-def get_reason():
-    print("Raisons de la sortie:")
-    for reason in reasons:
-        answer = input("%s ? (o/N) " % reason)
-        if answer and answer[0].lower() in ["o", "y"]:
-            user_data["reasons"].append(reason)
-
-
-def main():
-    get_reason()
-    generate_pdf(user_data)
-
 
 
 background_string = BytesIO(base64.b64decode("""
