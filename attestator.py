@@ -20,6 +20,16 @@ from reportlab.graphics import renderPDF
 
 now = datetime.now()
 
+dict_reasons = {
+    "travail": 18.6,
+    "courses": 16.85,
+    "sante": 15.4,
+    "famille": 14.1,
+    "sport": 12.15,
+    "judiciaire": 10.5,
+    "missions": 9.2,
+}
+
 def generate_pdf(user_data):
 
     for key in user_data:
@@ -80,7 +90,7 @@ def generate_pdf(user_data):
 
     c.setFont("Helvetica", 14)
     #for reason in user_data["reasons"]:
-    c.drawString(2.7 * cm, user_data["reasons"] * cm, "X")
+    c.drawString(2.7 * cm, dict_reasons[user_data["reasons"]] * cm, "X")
 
     qrcode = generate_qrcode(user_data)
 
