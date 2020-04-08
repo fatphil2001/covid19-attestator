@@ -1,2 +1,2 @@
 #!/bin/bash
-voila attestator.ipynb
+voila attestator-gui.ipynb
