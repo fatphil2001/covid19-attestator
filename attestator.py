@@ -18,9 +18,21 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.barcode.qr import QrCodeWidget
 from reportlab.graphics import renderPDF
 
-now = datetime.now()
+user_data = {
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "birth_year": 1970,
+    "birth_month": 1,
+    "birth_day": 1,
+    "birth_place": "Lyon",
+    "address": "999 avenue de france",
+    "zip_code": "75001",
+    "city": "Paris",
+    "reasons": [],
+    "trip_datetime": datetime.now() + timedelta(minutes=10),
+}
 
-dict_reasons = {
+reasons = {
     "travail": 18.6,
     "courses": 16.85,
     "sante": 15.4,
@@ -30,8 +42,10 @@ dict_reasons = {
     "missions": 9.2,
 }
 
-def generate_pdf(user_data):
+now = datetime.now()
 
+
+def generate_pdf(user_data):
     for key in user_data:
         assert (user_data[key] != ''), 'Erreur: le champs '+ key + ' est vide.'
 
@@ -89,8 +103,8 @@ def generate_pdf(user_data):
     )
 
     c.setFont("Helvetica", 14)
-    #for reason in user_data["reasons"]:
-    c.drawString(2.7 * cm, dict_reasons[user_data["reasons"]] * cm, "X")
+    for reason in user_data["reasons"]:
+        c.drawString(2.7 * cm, reasons[reason] * cm, "X")
 
     qrcode = generate_qrcode(user_data)
 
@@ -109,7 +123,8 @@ def generate_pdf(user_data):
     renderPDF.draw(big_qr, c, 1.3 * cm, 16.8 * cm)
 
     c.save()
-    # print("'attestation.pdf' a été généré.")
+
+    print("'attestation.pdf' a été généré.")
 
 
 def generate_qrcode(user_data):
@@ -136,10 +151,24 @@ def generate_qrcode(user_data):
                 user_data["trip_datetime"].hour,
                 user_data["trip_datetime"].minute,
             ),
-            "Motifs: %s" % user_data["reasons"],
+            "Motifs: %s" % "-".join(user_data["reasons"]),
         ]
     )
     return QrCodeWidget(code)
+
+
+def get_reason():
+    print("Raisons de la sortie:")
+    for reason in reasons:
+        answer = input("%s ? (o/N) " % reason)
+        if answer and answer[0].lower() in ["o", "y"]:
+            user_data["reasons"].append(reason)
+
+
+def main():
+    get_reason()
+    generate_pdf(user_data)
+
 
 
 background_string = BytesIO(base64.b64decode("""
