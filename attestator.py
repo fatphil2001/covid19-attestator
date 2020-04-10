@@ -45,8 +45,11 @@ reasons = {
 now = datetime.now()
 
 
-def generate_pdf(user_data):
-    c = canvas.Canvas("attestation.pdf")
+def generate_pdf(user_data, output_file="attestation.pdf"):
+    for key in user_data:
+        assert (user_data[key] != ''), 'Erreur: le champs '+ key + ' est vide.'
+
+    c = canvas.Canvas(output_file)
 
     im = ImageReader(background_image)
     width, height = im.getSize()
@@ -5009,4 +5012,3 @@ background_image = Image.open(background_string)
 
 if __name__ == "__main__":
     main()
-
