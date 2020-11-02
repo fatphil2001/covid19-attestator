@@ -1,4 +1,13 @@
-# Covid-19 French attestator
+# Covid-19 French attestator - October 2020 version
+
+## Work in progress
+- Done
+  - updated png background
+  - updated coordonates of text, checkboxes and small QR code
+- To do 
+  - Add the new reason checkboxes
+  - update QR encoding to match latest model used by govt.
+
 
 ## How to use?
 
